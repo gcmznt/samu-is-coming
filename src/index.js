@@ -10,6 +10,7 @@ import "firebase/analytics";
 // Add the Firebase products that you want to use
 import "firebase/auth";
 import "firebase/messaging";
+import "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBYuBVHKOnjyHq-IN6_of7HipPJyTelUVc",
@@ -25,6 +26,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
+var database = firebase.firestore();
+
 const messaging = firebase.messaging();
 messaging.usePublicVapidKey(
   "BFDFvvxgmBmTtjSzf1v4nHsLN-9RM19h2zXGmgONsgposb3vOoNKZZUVPQPrwLvCycSglWhEmSxSaL9e_z4_z2o"
@@ -35,6 +38,18 @@ messaging
   .then(currentToken => {
     if (currentToken) {
       console.log(currentToken);
+
+      database
+        .collection("endpoints")
+        .add({
+          endpoint: currentToken
+        })
+        .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function(error) {
+          console.error("Error adding document: ", error);
+        });
       // sendTokenToServer(currentToken);
       // updateUIForPushEnabled(currentToken);
     } else {
