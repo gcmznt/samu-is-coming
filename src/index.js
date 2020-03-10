@@ -39,18 +39,7 @@ messaging
     if (currentToken) {
       console.log(currentToken);
 
-      database
-        .collection("endpoints")
-        .add({
-          endpoint: currentToken
-        })
-        .then(function(docRef) {
-          console.log("Document written with ID: ", docRef.id);
-        })
-        .catch(function(error) {
-          console.error("Error adding document: ", error);
-        });
-      // sendTokenToServer(currentToken);
+      sendTokenToServer(currentToken);
       // updateUIForPushEnabled(currentToken);
     } else {
       // Show permission request.
@@ -59,19 +48,45 @@ messaging
       );
       // Show permission UI.
       // updateUIForPushPermissionRequired();
-      // setTokenSentToServer(false);
+      setTokenSentToServer(false);
     }
   })
   .catch(err => {
     console.log("An error occurred while retrieving token. ", err);
     // showToken('Error retrieving Instance ID token. ', err);
-    // setTokenSentToServer(false);
+    setTokenSentToServer(false);
   });
 
 messaging.onMessage(payload => {
   console.log("Message received. ", payload);
   // ...
 });
+
+function sendTokenToServer(currentToken) {
+  if (!isTokenSentToServer()) {
+    database
+      .collection("endpoints")
+      .add({
+        endpoint: currentToken
+      })
+      .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+        setTokenSentToServer(true);
+      })
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
+      });
+    setTokenSentToServer(true);
+  }
+}
+
+function isTokenSentToServer() {
+  return window.localStorage.getItem("sentToServer") === "1";
+}
+
+function setTokenSentToServer(sent) {
+  window.localStorage.setItem("sentToServer", sent ? "1" : "0");
+}
 
 function requestPermission() {
   console.log("Requesting permission...");
