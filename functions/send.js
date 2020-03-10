@@ -2,8 +2,8 @@ exports.handler = function(event, context, callback) {
   const fetch = require("node-fetch");
 
   var key = process.env.KEY;
-  var to =
-    "e0RPOD3O-DoiGz5TUAKz1r:APA91bGCGJSRuvK-kcxnrdMXPbKSqGiipSqhDP-Aa8vE0-G8peLEEnnNkBOxyHOlLdWmMJtnyEo9uhg0KiBLe77lpottlX4Xjtk4FGWsJFkGnIKxg86cRWB-asZgce2RpEj400lSN4YG";
+  var to = process.env.TEST_ENDPOINT;
+
   var notification = {
     title: "Portugal vs. Denmark",
     body: "5 to 1",
