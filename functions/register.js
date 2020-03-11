@@ -4,7 +4,6 @@ exports.handler = function(event, context, callback) {
     type: "service_account",
     project_id: "samu-is-coming",
     private_key_id: process.env.FB_PKID,
-    private_key: process.env.FB_PK.replace(/\\n/g, "\n"),
     private_key:
       process.env.FB_PK[0] === "-"
         ? process.env.FB_PK
