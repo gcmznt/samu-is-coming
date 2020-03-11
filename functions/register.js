@@ -21,9 +21,9 @@ exports.handler = async function(event, context) {
   return admin
     .messaging()
     .subscribeToTopic(event.queryStringParameters.token, "samu")
-    .then(response => ({
+    .then(data => ({
       statusCode: 200,
-      body: response
+      body: JSON.stringify(data)
     }))
     .catch(error => ({ statusCode: 422, body: String(error) }));
 };
