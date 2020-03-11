@@ -1,4 +1,4 @@
-exports.handler = function(event, context, callback) {
+exports.handler = async function(event, context) {
   var admin = require("firebase-admin");
   var serviceAccount = {
     type: "service_account",
@@ -18,17 +18,12 @@ exports.handler = function(event, context, callback) {
     databaseURL: "https://samu-is-coming.firebaseio.com"
   });
 
-  admin
+  return admin
     .messaging()
     .subscribeToTopic(event.queryStringParameters.token, "samu")
-    .then(function(response) {
-      console.log(response);
-      callback(null, {
-        statusCode: 200,
-        body: response
-      });
-    })
-    .catch(function(error) {
-      console.log("Error subscribing to topic:", error);
-    });
+    .then(response => ({
+      statusCode: 200,
+      body: response
+    }))
+    .catch(error => ({ statusCode: 422, body: String(error) }));
 };
