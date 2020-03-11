@@ -4,7 +4,7 @@ exports.handler = function(event, context, callback) {
     type: "service_account",
     project_id: "samu-is-coming",
     private_key_id: process.env.FB_PKID,
-    private_key: process.env.FB_PK,
+    private_key: process.env.FB_PK.replace(/\\n/g, "\n"),
     client_email: process.env.FB_CLIENT,
     client_id: process.env.FB_CLID,
     auth_uri: "https://accounts.google.com/o/oauth2/auth",
