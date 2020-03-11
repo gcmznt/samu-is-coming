@@ -22,6 +22,7 @@ exports.handler = function(event, context, callback) {
     .messaging()
     .subscribeToTopic(event.queryStringParameters.token, "samu")
     .then(function(response) {
+      console.log(response);
       callback(null, {
         statusCode: 200,
         body: response
