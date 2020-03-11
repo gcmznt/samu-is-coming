@@ -5,6 +5,10 @@ exports.handler = function(event, context, callback) {
     project_id: "samu-is-coming",
     private_key_id: process.env.FB_PKID,
     private_key: process.env.FB_PK.replace(/\\n/g, "\n"),
+    private_key:
+      process.env.FB_PK[0] === "-"
+        ? process.env.FB_PK
+        : JSON.parse(process.env.FB_PK),
     client_email: process.env.FB_CLIENT,
     client_id: process.env.FB_CLID,
     auth_uri: "https://accounts.google.com/o/oauth2/auth",
