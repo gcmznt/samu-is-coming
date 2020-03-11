@@ -64,18 +64,18 @@ messaging.onMessage(payload => {
 
 function sendTokenToServer(currentToken) {
   if (!isTokenSentToServer()) {
-    database
-      .collection("endpoints")
-      .add({
-        endpoint: currentToken
-      })
-      .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-        setTokenSentToServer(true);
-      })
-      .catch(function(error) {
-        console.error("Error adding document: ", error);
-      });
+    // database
+    //   .collection("endpoints")
+    //   .add({
+    //     endpoint: currentToken
+    //   })
+    //   .then(function(docRef) {
+    //     console.log("Document written with ID: ", docRef.id);
+    //     setTokenSentToServer(true);
+    //   })
+    //   .catch(function(error) {
+    //     console.error("Error adding document: ", error);
+    //   });
     setTokenSentToServer(true);
   }
 }
