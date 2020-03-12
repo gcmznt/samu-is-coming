@@ -6,11 +6,9 @@ import * as serviceWorker from "./serviceWorker";
 import * as firebase from "firebase/app";
 
 import "firebase/analytics";
-
-// Add the Firebase products that you want to use
 import "firebase/auth";
-import "firebase/messaging";
 import "firebase/firestore";
+import "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBYuBVHKOnjyHq-IN6_of7HipPJyTelUVc",
@@ -25,58 +23,37 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-
-var database = firebase.firestore();
-
 const messaging = firebase.messaging();
 messaging.usePublicVapidKey(
   "BFDFvvxgmBmTtjSzf1v4nHsLN-9RM19h2zXGmgONsgposb3vOoNKZZUVPQPrwLvCycSglWhEmSxSaL9e_z4_z2o"
 );
 
-messaging
-  .getToken()
-  .then(currentToken => {
-    if (currentToken) {
-      console.log(currentToken);
-
-      sendTokenToServer(currentToken);
-      // updateUIForPushEnabled(currentToken);
-    } else {
-      // Show permission request.
-      console.log(
-        "No Instance ID token available. Request permission to generate one."
-      );
-      // Show permission UI.
-      // updateUIForPushPermissionRequired();
+function subscribe() {
+  return messaging
+    .getToken()
+    .then(currentToken => {
+      if (currentToken) {
+        sendTokenToServer(currentToken);
+      } else {
+        setTokenSentToServer(false);
+      }
+    })
+    .catch(err => {
       setTokenSentToServer(false);
-    }
-  })
-  .catch(err => {
-    console.log("An error occurred while retrieving token. ", err);
-    // showToken('Error retrieving Instance ID token. ', err);
-    setTokenSentToServer(false);
-  });
+    });
+}
 
 messaging.onMessage(payload => {
   console.log("Message received. ", payload);
-  // ...
 });
 
 function sendTokenToServer(currentToken) {
   if (!isTokenSentToServer()) {
-    // database
-    //   .collection("endpoints")
-    //   .add({
-    //     endpoint: currentToken
-    //   })
-    //   .then(function(docRef) {
-    //     console.log("Document written with ID: ", docRef.id);
-    //     setTokenSentToServer(true);
-    //   })
-    //   .catch(function(error) {
-    //     console.error("Error adding document: ", error);
-    //   });
-    setTokenSentToServer(true);
+    fetch(`/.netlify/functions/register?token=${currentToken}`, {
+      method: "POST"
+    })
+      .then(d => d.json())
+      .then(() => setTokenSentToServer(true));
   }
 }
 
@@ -89,27 +66,17 @@ function setTokenSentToServer(sent) {
 }
 
 function requestPermission() {
-  console.log("Requesting permission...");
-  // [START request_permission]
   Notification.requestPermission().then(permission => {
     if (permission === "granted") {
-      console.log("Notification permission granted.");
-      // TODO(developer): Retrieve an Instance ID token for use with FCM.
-      // [START_EXCLUDE]
-      // In many cases once an app has been granted notification permission,
-      // it should update its UI reflecting this.
-      // resetUI();
-      // [END_EXCLUDE]
-    } else {
-      console.log("Unable to get permission to notify.");
+      subscribe();
     }
   });
-  // [END request_permission]
 }
 
-requestPermission();
-
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <App action={requestPermission} />,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
