@@ -28,7 +28,7 @@ messaging.setBackgroundMessageHandler(function(payload) {
   const notificationTitle = "È nato 🦄";
   const notificationOptions = {
     body: `Samuele è nato! ${today}`,
-    icon: "/img/fiocco.png",
+    icon: "/images/fiocco.png",
     vibrate: [200, 100, 200, 100, 200, 100, 200]
   };
 
