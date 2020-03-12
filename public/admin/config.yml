@@ -12,6 +12,7 @@ collections:
     create: true # Allow users to create new documents in this collection
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
+      - { label: "Nome", name: "title", widget: "string" }
       - { label: "Peso", name: "weight", widget: "number" }
       - { label: "Lunghezza", name: "length", widget: "number" }
       - { label: "Data", name: "date", widget: "datetime" }
