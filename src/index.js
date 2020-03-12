@@ -9,6 +9,7 @@ import "firebase/analytics";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/messaging";
+import { Body } from "node-fetch";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBYuBVHKOnjyHq-IN6_of7HipPJyTelUVc",
@@ -27,6 +28,7 @@ firebase.analytics();
 let messaging;
 
 if (firebase.messaging.isSupported()) {
+  document.body.classList.add("has-notification");
   messaging = firebase.messaging();
   messaging.usePublicVapidKey(
     "BFDFvvxgmBmTtjSzf1v4nHsLN-9RM19h2zXGmgONsgposb3vOoNKZZUVPQPrwLvCycSglWhEmSxSaL9e_z4_z2o"
