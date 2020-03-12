@@ -1,6 +1,9 @@
 import React from "react";
 import cactus from "./images/cactus.svg";
 import regalo from "./images/present.svg";
+import hand from "./images/hand.svg";
+import love from "./images/love.svg";
+import star from "./images/star.svg";
 // import "./App.css";
 
 // process.env.REACT_APP_TITLE;
@@ -8,7 +11,8 @@ import regalo from "./images/present.svg";
 // process.env.REACT_APP_LENGTH;
 // process.env.REACT_APP_WEIGHT;
 
-function share() {
+function share(e) {
+  e.preventDefault();
   window.navigator.share({
     title: "È nato Samuele?",
     text:
@@ -42,10 +46,20 @@ function App({ action, hasPush }) {
         </a>
       </aside>
 
+      <footer>
+        <br />
+        Cate
+        <img src={love} alt="Love" />
+        Vale
+        <img src={star} alt="Star" />
+        Giko
+      </footer>
+
       {window.navigator ? (
         <aside className="share">
-          <img src={cactus} alt="Cactus" />
-          <button onClick={share}>Condividi</button>
+          <a href="#share" onClick={share}>
+            Condividi
+          </a>
         </aside>
       ) : null}
     </main>
