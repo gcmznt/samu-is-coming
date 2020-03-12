@@ -12,6 +12,7 @@ body {
   font-size: 26px;
   background: url("./images/sf.svg") center 13vw no-repeat;
   background-size: 80% auto;
+  padding-bottom: 20vw;
 }
 
 h1 {
@@ -138,6 +139,10 @@ code {
   }
 }
 
+button {
+  -webkit-appearance: button;
+}
+
 button,
 .button {
   font-family: inherit;
@@ -146,7 +151,6 @@ button,
   margin: 0;
   overflow: visible;
   text-transform: none;
-  -webkit-appearance: button;
   background: url(./images/btn.svg), url(./images/brush.svg);
   background-position: center center;
   background-size: 100% 100%, contain;
