@@ -24,12 +24,22 @@ messaging.setBackgroundMessageHandler(function(payload) {
     payload
   );
 
+  const today = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
   const notificationTitle = "È nato 🦄";
   const notificationOptions = {
-    body: "Samuele è nato!",
+    body: `Samuele è nato! ${today}`,
     icon: "/img/fiocco.png",
     vibrate: [200, 100, 200, 100, 200, 100, 200]
   };
+
+  self.addEventListener(
+    "notificationclick",
+    function(event) {
+      event.notification.close();
+      clients.openWindow("/?notification");
+    },
+    false
+  );
 
   return self.registration.showNotification(
     notificationTitle,

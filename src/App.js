@@ -8,7 +8,15 @@ import regalo from "./images/present.svg";
 // process.env.REACT_APP_LENGTH;
 // process.env.REACT_APP_WEIGHT;
 
-function App({ action }) {
+function share() {
+  window.navigator.share({
+    title: "Samu",
+    text: "È nato samuele?",
+    url: "https://samu.laricettadellafelicita.it"
+  });
+}
+
+function App({ action, hasPush }) {
   return (
     <main>
       <h1>Samuele</h1>
@@ -16,10 +24,13 @@ function App({ action }) {
       <div className="meter"></div>
       <p className="loading">Loading</p>
 
-      <aside className="notification">
-        <img src={cactus} alt="Cactus" />
-        <button onClick={action}>Resta aggiornato</button>
-      </aside>
+      {hasPush ? (
+        <aside className="notification">
+          <img src={cactus} alt="Cactus" />
+          <button onClick={action}>Resta aggiornato</button>
+        </aside>
+      ) : null}
+
       <aside className="wishlist">
         <img src={regalo} alt="Regalo" />
         <a
@@ -29,6 +40,13 @@ function App({ action }) {
           Lista nascita
         </a>
       </aside>
+
+      {window.navigator ? (
+        <aside className="share">
+          <img src={cactus} alt="Cactus" />
+          <button onClick={share}>Condividi</button>
+        </aside>
+      ) : null}
     </main>
   );
 }

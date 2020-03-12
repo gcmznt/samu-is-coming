@@ -180,10 +180,6 @@ button:hover,
   filter: hue-rotate(270deg) saturate(1.4);
 }
 
-body:not(.has-notification) .notification {
-  display: none;
-}
-
 aside {
   display: flex;
   flex-direction: column;
