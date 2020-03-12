@@ -1,7 +1,6 @@
 import React from "react";
 import cactus from "./images/cactus.svg";
 import regalo from "./images/present.svg";
-import hand from "./images/hand.svg";
 import love from "./images/love.svg";
 import star from "./images/star.svg";
 // import "./App.css";
