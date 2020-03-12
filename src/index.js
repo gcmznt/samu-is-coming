@@ -9,7 +9,6 @@ import "firebase/analytics";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/messaging";
-import { Body } from "node-fetch";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBYuBVHKOnjyHq-IN6_of7HipPJyTelUVc",
