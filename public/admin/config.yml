@@ -13,6 +13,18 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
       - { label: "Nome", name: "title", widget: "string" }
-      - { label: "Peso", name: "weight", widget: "number" }
-      - { label: "Lunghezza", name: "length", widget: "number" }
-      - { label: "Data", name: "date", widget: "datetime" }
+      - {
+          label: "Peso",
+          name: "weight",
+          widget: "number",
+          valueType: "float",
+          required: false,
+        }
+      - {
+          label: "Lunghezza",
+          name: "length",
+          widget: "number",
+          valueType: "int",
+          required: false,
+        }
+      - { label: "Data", name: "date", widget: "datetime", required: false }
