@@ -32,6 +32,17 @@ if (firebase.messaging.isSupported()) {
   messaging.usePublicVapidKey(
     "BFDFvvxgmBmTtjSzf1v4nHsLN-9RM19h2zXGmgONsgposb3vOoNKZZUVPQPrwLvCycSglWhEmSxSaL9e_z4_z2o"
   );
+
+  messaging.onMessage(payload => {
+    const notificationTitle = "È nato 🦄";
+    const notificationOptions = {
+      body: "Samuele è nato!",
+      icon: "/img/fiocco.png",
+      vibrate: [200, 100, 200, 100, 200, 100, 200]
+    };
+
+    new Notification(notificationTitle, notificationOptions);
+  });
 }
 
 function subscribe() {
