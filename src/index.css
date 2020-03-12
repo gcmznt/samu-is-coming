@@ -1,13 +1,193 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Snubnose", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary-color: #9adcf2;
+
+  text-align: center;
+  font-size: 26px;
+  background: url("./images/sf.svg") center 13vw no-repeat;
+  background-size: 80% auto;
+}
+
+h1 {
+  font-family: "RedRock", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+
+  color: var(--primary-color);
+  font-size: 24vw;
+  margin: 0.7em auto 0.3em;
+}
+
+p {
+  font-size: 1.4em;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@font-face {
+  font-family: "Snubnose";
+  src: url("./fonts/snubnose.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RedRock";
+  src: url("./fonts/redrock.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.loading {
+  position: relative;
+}
+
+.loading::after {
+  position: absolute;
+  content: "...";
+  animation: infinite loading linear 2s;
+}
+
+.loading::before {
+  background: url("./images/sf2.svg") center center no-repeat;
+  background-size: contain;
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  height: 7vw;
+  z-index: -1;
+}
+
+.meter {
+  position: relative;
+  /* height: 26px;
+  width: 332px; */
+  height: 21px;
+  width: 224px;
+  margin: auto;
+}
+
+.meter::after {
+  background: url(./images/barra.svg) no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: -1.3px;
+  left: -46px;
+  right: -62px;
+  bottom: -3.7px;
+  content: "";
+}
+
+.meter::before {
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  clip-path: url(./images/clip-path.svg#myClip);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 0%,
+    var(--primary-color) 50%,
+    transparent 50%
+  );
+  background-size: 201% 100%;
+  background-position: 100% 50%;
+  content: "";
+  animation: infinite loading-bar ease 4s;
+  transform-origin: left center;
+}
+
+@keyframes loading-bar {
+  from {
+    /* transform: scaleX(0); */
+    background-position: 100% 50%;
+  }
+
+  to {
+    background-position: 0% 50%;
+    /* transform: scaleX(1); */
+  }
+}
+
+@keyframes loading {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+  100% {
+    content: "";
+  }
+}
+
+button,
+.button {
+  font-family: inherit;
+  font-size: 0.5em;
+  line-height: 1.15;
+  margin: 0;
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  background: url(./images/btn.svg), url(./images/brush.svg);
+  background-position: center center;
+  background-size: 100% 100%, contain;
+  background-repeat: no-repeat;
+  border: 0;
+  color: inherit;
+  text-decoration: none;
+  height: 50px;
+  width: 190px;
+  vertical-align: middle;
+  display: inline-flex;
+  padding: 5px 0 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all ease 50ms;
+}
+
+button:hover,
+.button:hover {
+  transform: translate(2px, 2px);
+}
+
+.secondary {
+  filter: hue-rotate(270deg) saturate(1.4);
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+aside img {
+  max-width: 65px;
+  margin: 20px;
+}
+
+aside + aside {
+  margin-top: 30px;
 }

@@ -8,14 +8,15 @@
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^7.10.0",
     "firebase-admin": "^8.9.2",
+    "front-matter": "^3.1.0",
     "node-fetch": "^2.6.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "node ./convertData.js && react-scripts start",
+    "build": "node ./convertData.js && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
