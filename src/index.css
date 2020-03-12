@@ -183,9 +183,13 @@ button,
   transition: all ease 50ms;
 }
 
+button:not([disabled]) {
+  transform: translate(-2px, -2px);
+}
+
 button:hover,
 .button:hover {
-  transform: translate(2px, 2px);
+  transform: translate(0px, 0px);
 }
 
 .secondary {
@@ -202,6 +206,11 @@ aside {
 .wishlist img {
   max-width: 65px;
   margin-bottom: 20px;
+}
+
+.notification button img {
+  max-height: 30px;
+  margin-bottom: 8px;
 }
 
 .share {

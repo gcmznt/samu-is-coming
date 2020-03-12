@@ -75,7 +75,11 @@ function requestPermission() {
 }
 
 ReactDOM.render(
-  <App action={requestPermission} hasPush={firebase.messaging.isSupported()} />,
+  <App
+    action={requestPermission}
+    hasPush={firebase.messaging.isSupported()}
+    isTokenSentToServer={isTokenSentToServer}
+  />,
   document.getElementById("root")
 );
 

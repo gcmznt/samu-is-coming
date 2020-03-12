@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import cactus from "./images/cactus.svg";
 import regalo from "./images/present.svg";
 import love from "./images/love.svg";
 import star from "./images/star.svg";
-// import "./App.css";
 
 // process.env.REACT_APP_TITLE;
 // process.env.REACT_APP_DATE;
@@ -20,7 +19,14 @@ function share(e) {
   });
 }
 
-function App({ action, hasPush }) {
+function App({ action, hasPush, isTokenSentToServer }) {
+  const [loading, setLoading] = useState(false);
+
+  function notifyMe() {
+    setLoading(true);
+    action();
+  }
+
   return (
     <main>
       <h1>Samuele</h1>
@@ -28,10 +34,12 @@ function App({ action, hasPush }) {
       <div className="meter"></div>
       <p className="loading">Loading</p>
 
-      {hasPush ? (
+      {hasPush && !isTokenSentToServer() ? (
         <aside className="notification">
           <img src={cactus} alt="Cactus" />
-          <button onClick={action}>Resta aggiornato</button>
+          <button onClick={notifyMe} disabled={loading}>
+            {loading ? <img src={love} alt="Love" /> : "Resta aggiornato"}
+          </button>
         </aside>
       ) : null}
 
