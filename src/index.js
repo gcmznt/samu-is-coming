@@ -23,10 +23,15 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-const messaging = firebase.messaging();
-messaging.usePublicVapidKey(
-  "BFDFvvxgmBmTtjSzf1v4nHsLN-9RM19h2zXGmgONsgposb3vOoNKZZUVPQPrwLvCycSglWhEmSxSaL9e_z4_z2o"
-);
+
+let messaging;
+
+if (firebase.messaging.isSupported()) {
+  messaging = firebase.messaging();
+  messaging.usePublicVapidKey(
+    "BFDFvvxgmBmTtjSzf1v4nHsLN-9RM19h2zXGmgONsgposb3vOoNKZZUVPQPrwLvCycSglWhEmSxSaL9e_z4_z2o"
+  );
+}
 
 function subscribe() {
   return messaging
@@ -42,10 +47,6 @@ function subscribe() {
       setTokenSentToServer(false);
     });
 }
-
-messaging.onMessage(payload => {
-  console.log("Message received. ", payload);
-});
 
 function sendTokenToServer(currentToken) {
   if (!isTokenSentToServer()) {

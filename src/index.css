@@ -54,7 +54,7 @@ code {
 .loading::after {
   position: absolute;
   content: "...";
-  animation: infinite loading linear 2s;
+  animation: infinite loading linear 4s;
 }
 
 .loading::before {
@@ -90,8 +90,7 @@ code {
 }
 
 .meter::before {
-  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-  clip-path: url(./images/clip-path.svg#myClip);
+  clip-path: polygon(0 26%, 98% 0, 100% 95%, 1% 100%);
   position: absolute;
   top: 0;
   left: 0;
