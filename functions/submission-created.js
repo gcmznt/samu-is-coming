@@ -20,15 +20,15 @@ var message = {
   topic: topic
 };
 
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://samu-is-coming.firebaseio.com"
+});
+
 exports.handler = async function(event, context) {
   console.log("event", JSON.parse(event.body).payload.data.pwd);
 
-  if (JSON.parse(event.body).payload.data.pwd !== "test") return;
-
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://samu-is-coming.firebaseio.com"
-  });
+  if (JSON.parse(event.body).payload.data.pwd !== process.env.SEND_PWD) return;
 
   return admin
     .messaging()
