@@ -1,4 +1,5 @@
-/* global self, importScripts, firebase */
+/* eslint-disable no-restricted-globals */
+/* global self, importScripts, firebase, clients */
 
 importScripts("https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js");
 importScripts(
@@ -24,6 +25,7 @@ messaging.setBackgroundMessageHandler(function(payload) {
     payload
   );
 
+  const now = new Date();
   const today = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
   const notificationTitle = "È nato 🦄";
   const notificationOptions = {
