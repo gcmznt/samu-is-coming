@@ -13,7 +13,7 @@ function action(e) {
 }
 
 export default function Share() {
-  return window.navigator ? (
+  return window.navigator.share ? (
     <aside className="share">
       <a href="#share" onClick={action}>
         Condividi
