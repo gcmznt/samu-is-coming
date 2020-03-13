@@ -20,11 +20,6 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler(function(payload) {
-  console.log(
-    "[firebase-messaging-sw.js] Received background message ",
-    payload
-  );
-
   const now = new Date();
   const today = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
   const notificationTitle = "È nato 🦄";
