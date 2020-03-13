@@ -11,8 +11,13 @@
         <label>Password: <input type="password" name="pwd"/></label>
       </p>
       <p>
+        <input type="hidden" id="rand" value="" />
         <button type="submit">Send</button>
       </p>
+
+      <script>
+        document.querySelector("#rand").value = Math.random();
+      </script>
     </form>
   </body>
 </html>
