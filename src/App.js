@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import regalo from "./images/present.svg";
-import love from "./images/love.svg";
-import star from "./images/star.svg";
 
+import Footer from "./components/Footer";
 import IsBorn from "./components/IsBorn";
 import NotYet from "./components/NotYet";
 import Share from "./components/Share";
+import WishList from "./components/WishList";
 
 function App({ action, hasPush, isTokenSentToServer }) {
   const {
@@ -32,24 +31,8 @@ function App({ action, hasPush, isTokenSentToServer }) {
         <NotYet notify={notify} off={loading} />
       )}
 
-      <aside className="wishlist">
-        <img src={regalo} alt="Regalo" />
-        <a
-          className="button secondary"
-          href="https://www.amazon.it/baby-reg/24IL1T6C7U0YX"
-        >
-          Lista nascita
-        </a>
-      </aside>
-
-      <footer>
-        Cate
-        <img src={love} alt="Love" />
-        Vale
-        <img src={star} alt="Star" />
-        Giko
-      </footer>
-
+      <WishList />
+      <Footer />
       <Share />
     </main>
   );

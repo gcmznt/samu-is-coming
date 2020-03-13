@@ -4,7 +4,7 @@ import love from "../images/love.svg";
 
 export default function NotYet({ notify, off }) {
   return (
-    <>
+    <React.Fragment>
       <time>11/06/2020</time>
 
       <div className="meter"></div>
@@ -18,6 +18,6 @@ export default function NotYet({ notify, off }) {
           </button>
         </aside>
       ) : null}
-    </>
+    </React.Fragment>
   );
 }

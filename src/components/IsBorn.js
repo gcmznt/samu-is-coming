@@ -4,7 +4,7 @@ import scale from "../images/scale.svg";
 
 export default function IsBorn({ date, length, weight }) {
   return (
-    <>
+    <React.Fragment>
       <h2>E' nato!</h2>
       <time>
         {new Date(date).toLocaleString("it-IT", {
@@ -30,6 +30,6 @@ export default function IsBorn({ date, length, weight }) {
           </li>
         ) : null}
       </ul>
-    </>
+    </React.Fragment>
   );
 }
