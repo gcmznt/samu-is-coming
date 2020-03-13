@@ -13,7 +13,7 @@ var serviceAccount = {
   client_x509_cert_url: process.env.FB_CERTURL
 };
 
-var topic = "samu-test";
+var topic = process.env.TOPIC || "test";
 
 var message = {
   data: {},

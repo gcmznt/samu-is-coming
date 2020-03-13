@@ -20,7 +20,10 @@ admin.initializeApp({
 exports.handler = async function(event, context) {
   return admin
     .messaging()
-    .subscribeToTopic(event.queryStringParameters.token, "samu-test")
+    .subscribeToTopic(
+      event.queryStringParameters.token,
+      process.env.TOPIC || "test"
+    )
     .then(data => ({
       statusCode: 200,
       body: JSON.stringify(data)
