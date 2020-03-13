@@ -4,20 +4,117 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol";
+        background: rgb(14, 30, 37);
+        color: white;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 22px;
+        line-height: 24px;
+      }
+
+      .main {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 75%;
+        max-width: 364px;
+        padding: 24px;
+        background: white;
+        color: rgb(14, 30, 37);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.16);
+      }
+
+      a {
+        margin: 0;
+        text-decoration: none;
+        font-weight: 600;
+        line-height: 24px;
+        color: #00ad9f;
+      }
+
+      a svg {
+        position: relative;
+        top: 2px;
+      }
+
+      a:hover,
+      a:focus {
+        text-decoration: underline;
+        color: #007a70;
+      }
+
+      a:hover svg path {
+        fill: #00ad9f;
+      }
+
+      p:last-of-type {
+        margin: 0;
+      }
+
+      input {
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 16px;
+        border: 1px solid #00ad9f;
+      }
+
+      button {
+        background-color: #00ad9f;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 4px;
+        font-size: 16px;
+        border: 0;
+      }
+    </style>
   </head>
   <body>
-    <form name="contact" method="POST" data-netlify="true">
-      <p>
-        <label>Password: <input type="password" name="pwd"/></label>
-      </p>
-      <p>
-        <input type="hidden" id="rand" value="" />
-        <button type="submit">Send</button>
-      </p>
+    <div class="main">
+      <div class="card">
+        <form name="contact" method="POST" data-netlify="true">
+          <div class="header">
+            <h1>
+              Send notification
+            </h1>
+          </div>
+          <div class="body">
+            <p>
+              <label
+                >Password: <input id="pwd" type="password" name="pwd"
+              /></label>
+            </p>
+            <p>
+              <input type="hidden" id="rand" value="" />
+              <button type="submit">Send</button>
+            </p>
+          </div>
 
-      <script>
-        document.querySelector("#rand").value = Math.random();
-      </script>
-    </form>
+          <script>
+            document.querySelector("#rand").value = Math.random();
+          </script>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
