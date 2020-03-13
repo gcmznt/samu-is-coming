@@ -14,7 +14,7 @@ ReactDOM.render(
   <App
     action={requestPermission}
     hasPush={isMessagingSupported}
-    isTokenSentToServer={isTokenSentToServer}
+    isTokenSentToServer={isTokenSentToServer()}
   />,
   document.getElementById("root")
 );

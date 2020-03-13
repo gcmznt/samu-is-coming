@@ -42,10 +42,12 @@ footer {
 h1 {
   color: var(--primary-color);
   font-size: 24vw;
+  font-weight: normal;
   margin: 0.7em auto 0.3em;
 }
 
 h2 {
+  font-weight: normal;
   margin-bottom: 20px;
 }
 
@@ -107,6 +109,13 @@ button:not([disabled]):not(:hover),
   transform: translate(-2px, -2px);
 }
 
+button.loading::after,
+.button.loading::after {
+  --animation-time: 2s;
+  font-size: 3em;
+  transform: translateY(-0.2em);
+}
+
 .loading,
 .meter,
 .share {
@@ -150,7 +159,7 @@ button:not([disabled]):not(:hover),
 }
 
 .loading::after {
-  animation: infinite loading-dots linear 4s;
+  animation: infinite loading-dots linear var(--animation-time, 4s);
   content: "...";
   position: absolute;
 }
@@ -206,7 +215,7 @@ aside + aside {
   width: 65px;
 }
 
-.loading::before,
+p.loading::before,
 .share::before {
   background: url("./images/sf2.svg") center center no-repeat;
   background-size: contain;

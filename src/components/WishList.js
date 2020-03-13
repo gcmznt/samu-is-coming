@@ -5,10 +5,7 @@ export default function WishList() {
   return (
     <aside className="wishlist">
       <img src={regalo} alt="Regalo" />
-      <a
-        className="button secondary"
-        href="https://www.amazon.it/baby-reg/24IL1T6C7U0YX"
-      >
+      <a className="button" href="https://www.amazon.it/baby-reg/24IL1T6C7U0YX">
         Lista nascita
       </a>
     </aside>

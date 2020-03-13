@@ -13,13 +13,18 @@ function App({ action, hasPush, isTokenSentToServer }) {
     REACT_APP_WEIGHT: weight
   } = process.env;
   const [loading, setLoading] = useState(false);
+  const [initialState] = useState(isTokenSentToServer);
+  const [subscribed, setSubscribed] = useState(initialState);
 
   function notifyMe() {
     setLoading(true);
-    action();
+    action().then(token => {
+      setSubscribed(!!token);
+      setLoading(false);
+    });
   }
 
-  const notify = hasPush() && !isTokenSentToServer() ? notifyMe : false;
+  const notify = hasPush() && !initialState ? notifyMe : false;
 
   return (
     <main>
@@ -28,7 +33,7 @@ function App({ action, hasPush, isTokenSentToServer }) {
       {date ? (
         <IsBorn date={date} length={length} weight={weight} />
       ) : (
-        <NotYet notify={notify} off={loading} />
+        <NotYet notify={notify} loading={loading} subscribed={subscribed} />
       )}
 
       <WishList />

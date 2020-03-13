@@ -17,13 +17,18 @@ admin.initializeApp({
   databaseURL: "https://samu-is-coming.firebaseio.com"
 });
 
+var messaging = admin.messaging();
+
 exports.handler = async function(event, context) {
-  return admin
-    .messaging()
+  return messaging
     .subscribeToTopic(
       event.queryStringParameters.token,
       process.env.TOPIC || "test"
     )
+    .then(data => {
+      admin.app().delete();
+      return data;
+    })
     .then(data => ({
       statusCode: 200,
       body: JSON.stringify(data)

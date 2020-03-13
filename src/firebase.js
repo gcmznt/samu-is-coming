@@ -33,40 +33,42 @@ function subscribe() {
     .getToken()
     .then(currentToken => {
       if (currentToken) {
-        sendTokenToServer(currentToken);
+        return sendTokenToServer(currentToken);
       } else {
-        setTokenSentToServer(false);
+        return setTokenSentToServer(false);
       }
     })
     .catch(err => {
-      setTokenSentToServer(false);
+      return setTokenSentToServer(false);
     });
 }
 
 function sendTokenToServer(currentToken) {
   if (!isTokenSentToServer()) {
-    fetch(`/.netlify/functions/register?token=${currentToken}`, {
+    return fetch(`/.netlify/functions/register?token=${currentToken}`, {
       method: "POST"
     })
       .then(d => d.json())
-      .then(() => setTokenSentToServer(true));
+      .then(d => setTokenSentToServer(d.successCount === 1));
   }
+  return true;
 }
 
 function setTokenSentToServer(sent) {
   window.localStorage.setItem("sentToServer", sent ? "1" : "0");
+  return sent;
 }
 
 export function isTokenSentToServer() {
   return window.localStorage.getItem("sentToServer") === "1";
 }
 
-export function requestPermission() {
-  Notification.requestPermission().then(permission => {
-    if (permission === "granted") {
-      subscribe();
-    }
-  });
+export async function requestPermission() {
+  const permission = await Notification.requestPermission();
+
+  if (permission === "granted") {
+    return subscribe();
+  }
 }
 
 export function isMessagingSupported() {
