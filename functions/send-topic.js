@@ -20,10 +20,7 @@ admin.initializeApp({
 var topic = "samu-test";
 
 var message = {
-  data: {
-    score: "850",
-    time: "2:45"
-  },
+  data: {},
   topic: topic
 };
 
