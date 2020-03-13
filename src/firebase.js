@@ -70,5 +70,7 @@ export function requestPermission() {
 }
 
 export function isMessagingSupported() {
-  firebase.messaging.isSupported();
+  return (
+    Notification.permission !== "denied" && firebase.messaging.isSupported()
+  );
 }
