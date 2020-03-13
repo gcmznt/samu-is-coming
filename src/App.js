@@ -19,7 +19,7 @@ function App({ action, hasPush, isTokenSentToServer }) {
     action();
   }
 
-  const notify = hasPush && !isTokenSentToServer() ? notifyMe : false;
+  const notify = hasPush() && !isTokenSentToServer() ? notifyMe : false;
 
   return (
     <main>
