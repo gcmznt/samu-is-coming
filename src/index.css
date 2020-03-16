@@ -19,7 +19,7 @@
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  background: url("./images/sf.svg") center 13vw no-repeat;
+  background: url("./images/sf.svg") center 4vw no-repeat;
   background-size: 80% auto;
   font-family: "Snubnose";
   font-size: 26px;
@@ -43,7 +43,7 @@ h1 {
   color: var(--primary-color);
   font-size: 24vw;
   font-weight: normal;
-  margin: 0.7em auto 0.3em;
+  margin: 0.3em auto 0.3em;
 }
 
 h2 {
@@ -264,7 +264,7 @@ p.loading::before,
 
 @media screen and (min-width: 768px) {
   body {
-    background-position: center 100px;
+    background-position: center 30px;
     background-size: 615px auto;
   }
 
