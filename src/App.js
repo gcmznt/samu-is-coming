@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import {
+  isMessagingSupported,
+  isTokenSentToServer,
+  requestPermission
+} from "./firebase";
 
 import Footer from "./components/Footer";
 import IsBorn from "./components/IsBorn";
@@ -6,25 +11,25 @@ import NotYet from "./components/NotYet";
 import Share from "./components/Share";
 import WishList from "./components/WishList";
 
-function App({ action, hasPush, isTokenSentToServer }) {
+function App() {
   const {
     REACT_APP_DATE: date,
     REACT_APP_LENGTH: length,
     REACT_APP_WEIGHT: weight
   } = process.env;
   const [loading, setLoading] = useState(false);
-  const [initialState] = useState(isTokenSentToServer);
+  const [initialState] = useState(isTokenSentToServer());
   const [subscribed, setSubscribed] = useState(initialState);
 
   function notifyMe() {
     setLoading(true);
-    action().then(token => {
+    requestPermission().then(token => {
       setSubscribed(!!token);
       setLoading(false);
     });
   }
 
-  const notify = hasPush() && !initialState ? notifyMe : false;
+  const notify = isMessagingSupported() && !initialState ? notifyMe : false;
 
   return (
     <main>
