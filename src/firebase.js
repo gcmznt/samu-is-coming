@@ -64,7 +64,7 @@ export function isTokenSentToServer() {
 }
 
 export async function requestPermission() {
-  const permission = await Notification.requestPermission();
+  const permission = await window.Notification.requestPermission();
 
   if (permission === "granted") {
     return subscribe();
@@ -73,6 +73,8 @@ export async function requestPermission() {
 
 export function isMessagingSupported() {
   return (
-    Notification.permission !== "denied" && firebase.messaging.isSupported()
+    window.Notification &&
+    window.Notification.permission !== "denied" &&
+    firebase.messaging.isSupported()
   );
 }
