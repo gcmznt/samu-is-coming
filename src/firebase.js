@@ -28,6 +28,15 @@ if (firebase.messaging.isSupported()) {
   );
 }
 
+// TODO: restore notification on focus
+messaging.onMessage(payload => {
+  console.log("Message received. ", payload);
+  // [START_EXCLUDE]
+  // Update the UI to include the received message.
+  // appendMessage(payload);
+  // [END_EXCLUDE]
+});
+
 function subscribe() {
   return messaging
     .getToken()
