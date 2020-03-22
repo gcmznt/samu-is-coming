@@ -28,13 +28,9 @@ if (firebase.messaging.isSupported()) {
   );
 }
 
-// TODO: restore notification on focus
-messaging.onMessage(payload => {
-  console.log("Message received. ", payload);
-  // [START_EXCLUDE]
-  // Update the UI to include the received message.
-  // appendMessage(payload);
-  // [END_EXCLUDE]
+messaging.onMessage(() => {
+  window.dispatchEvent(new Event("born"));
+  setTimeout(() => window.location.reload(), 2000);
 });
 
 function subscribe() {

@@ -129,14 +129,7 @@ button.loading::after,
 }
 
 .meter::before {
-  animation: infinite loading-bar ease 4s;
-  background: radial-gradient(
-    circle at 0%,
-    var(--primary-color) 50%,
-    transparent 50%
-  );
-  background-position: 20% 50%;
-  background-size: 201% 100%;
+  background-color: var(--primary-color);
   bottom: 0;
   clip-path: polygon(0 26%, 98% 0, 100% 95%, 1% 100%);
   content: "";
@@ -145,6 +138,22 @@ button.loading::after,
   right: 0;
   top: 0;
   transform-origin: left center;
+  transition: all ease 200ms;
+}
+
+.meter:not(.is-animated)::before {
+  --primary-color: red;
+}
+
+.meter.is-animated::before {
+  animation: infinite loading-bar ease 4s;
+  background: radial-gradient(
+    circle at 0%,
+    var(--primary-color) 50%,
+    transparent 50%
+  );
+  background-position: 0% 50%;
+  background-size: 201% 100%;
 }
 
 .meter::after {
@@ -159,9 +168,12 @@ button.loading::after,
 }
 
 .loading::after {
-  animation: infinite loading-dots linear var(--animation-time, 4s);
   content: "...";
   position: absolute;
+}
+
+.loading.is-animated::after {
+  animation: infinite loading-dots linear var(--animation-time, 4s);
 }
 
 .notification img,
