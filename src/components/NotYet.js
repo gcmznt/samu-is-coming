@@ -14,11 +14,10 @@ export default function NotYet({ notify, loading, subscribed }) {
   const meter = useRef();
 
   const isBorn = () => {
-    meter.current.addEventListener(
-      "animationiteration",
-      () => setAnimated(false),
-      false
-    );
+    meter.current.addEventListener("animationiteration", () => {
+      setAnimated(false);
+      setTimeout(() => window.location.reload(), 2000);
+    });
   };
 
   useEffect(() => {

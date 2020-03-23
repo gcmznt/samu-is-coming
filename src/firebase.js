@@ -30,7 +30,6 @@ if (firebase.messaging.isSupported()) {
 
 messaging.onMessage(() => {
   window.dispatchEvent(new Event("born"));
-  setTimeout(() => window.location.reload(), 2000);
 });
 
 function subscribe() {
