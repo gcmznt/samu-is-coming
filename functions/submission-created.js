@@ -28,16 +28,18 @@ admin.initializeApp({
 exports.handler = async function(event, context) {
   if (JSON.parse(event.body).payload.data.pwd !== process.env.SEND_PWD) return;
 
-  return admin
-    .messaging()
-    .send(message)
-    .then(res => {
-      admin.app().delete();
-      return res;
-    })
-    .then(res => ({
-      statusCode: 200,
-      body: res
-    }))
-    .catch(error => ({ statusCode: 422, body: String(error) }));
+  return (
+    admin
+      .messaging()
+      .send(message)
+      // .then(res => {
+      //   admin.app().delete();
+      //   return res;
+      // })
+      .then(res => ({
+        statusCode: 200,
+        body: res
+      }))
+      .catch(error => ({ statusCode: 422, body: String(error) }))
+  );
 };
