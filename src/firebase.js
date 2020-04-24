@@ -13,7 +13,7 @@ const firebaseConfig = {
   storageBucket: "samu-is-coming.appspot.com",
   messagingSenderId: "714982459562",
   appId: "1:714982459562:web:bbecf8ec9d4ba1ea52a8d3",
-  measurementId: "G-1ZQK9ECK53"
+  measurementId: "G-1ZQK9ECK53",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -26,23 +26,23 @@ if (firebase.messaging.isSupported()) {
   messaging.usePublicVapidKey(
     "BFDFvvxgmBmTtjSzf1v4nHsLN-9RM19h2zXGmgONsgposb3vOoNKZZUVPQPrwLvCycSglWhEmSxSaL9e_z4_z2o"
   );
-}
 
-messaging.onMessage(() => {
-  window.dispatchEvent(new Event("born"));
-});
+  messaging.onMessage(() => {
+    window.dispatchEvent(new Event("born"));
+  });
+}
 
 function subscribe() {
   return messaging
     .getToken()
-    .then(currentToken => {
+    .then((currentToken) => {
       if (currentToken) {
         return sendTokenToServer(currentToken);
       } else {
         return setTokenSentToServer(false);
       }
     })
-    .catch(err => {
+    .catch((err) => {
       return setTokenSentToServer(false);
     });
 }
@@ -50,10 +50,10 @@ function subscribe() {
 function sendTokenToServer(currentToken) {
   if (!isTokenSentToServer()) {
     return fetch(`/.netlify/functions/register?token=${currentToken}`, {
-      method: "POST"
+      method: "POST",
     })
-      .then(d => d.json())
-      .then(d => setTokenSentToServer(d.successCount === 1));
+      .then((d) => d.json())
+      .then((d) => setTokenSentToServer(d.successCount === 1));
   }
   return true;
 }
