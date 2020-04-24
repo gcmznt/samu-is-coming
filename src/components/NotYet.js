@@ -44,7 +44,7 @@ export default function NotYet({ notify, loading, subscribed }) {
           <button
             onClick={notify}
             disabled={loading || subscribed}
-            className={`secondary${loading ? " loading" : ""}`}
+            className={`secondary${loading ? " loading is-animated" : ""}`}
           >
             {btnText}
           </button>
