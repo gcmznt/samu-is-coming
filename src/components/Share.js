@@ -7,7 +7,7 @@ function action(e) {
       title: "È nato Samuele?",
       text:
         "Ti interessa sapere quando nascerà Samuele? Tieniti informato con questo link! Le linee telefoniche dei genitori sono intasate.",
-      url: "https://samu.laricettadellafelicita.it"
+      url: "https://samu.laricettadellafelicita.it",
     })
     .catch(() => {});
 }

@@ -1,5 +1,13 @@
 :root {
   --primary-color: #9adcf2;
+  --secondary-color: #a7e497;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #121212;
+    --foreground-color: #eee;
+  }
 }
 
 @font-face {
@@ -19,13 +27,27 @@
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  background: url("./images/sf.svg") center 4vw no-repeat;
-  background-size: 80% auto;
+  background: var(--background-color, white);
+  color: var(--foreground-color, black);
   font-family: "Snubnose";
   font-size: 26px;
   margin: 0;
   padding-bottom: 100px;
   text-align: center;
+}
+
+body::before {
+  background-color: currentColor;
+  content: "";
+  height: 500px;
+  left: 0;
+  mask: url(./images/sf.svg) no-repeat;
+  mask-size: 80% auto;
+  mask-position: center top;
+  position: absolute;
+  top: 3.2vw;
+  width: 100%;
+  z-index: -1;
 }
 
 main {
@@ -76,13 +98,10 @@ button {
 button,
 .button {
   align-items: center;
-  background: url(./images/btn.svg), url(./images/brush.svg);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%, contain;
+  background: transparent;
   border: 0;
   box-sizing: border-box;
-  color: inherit;
+  color: var(--background-color, black);
   cursor: pointer;
   display: inline-flex;
   font-family: inherit;
@@ -93,6 +112,7 @@ button,
   margin: 0;
   overflow: visible;
   padding: 5px 0 0;
+  position: relative;
   text-decoration: none;
   text-transform: none;
   transition: all ease 50ms;
@@ -100,8 +120,36 @@ button,
   width: 190px;
 }
 
-.secondary {
-  filter: hue-rotate(270deg) saturate(1.4);
+button::before,
+.button::before,
+button::after,
+.button::after {
+  background-color: var(--foreground-color, black);
+  content: "";
+  height: 100%;
+  left: 0;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+button::before,
+.button::before {
+  mask-image: url(./images/btn.svg);
+}
+
+button::after,
+.button::after {
+  background-color: var(--primary-color);
+  mask-image: url(./images/brush.svg);
+}
+
+.secondary::after {
+  background-color: var(--secondary-color);
 }
 
 button:not([disabled]):not(:hover),
@@ -133,6 +181,7 @@ button.loading::after,
   bottom: 0;
   clip-path: polygon(0 26%, 98% 0, 100% 95%, 1% 100%);
   content: "";
+  filter: brightness(var(--brightness, 1));
   left: 0;
   position: absolute;
   right: 0;
@@ -157,11 +206,12 @@ button.loading::after,
 }
 
 .meter::after {
-  background: url(./images/barra.svg) no-repeat;
-  background-size: contain;
+  background-color: currentColor;
   bottom: -3.7px;
   content: "";
   left: -46px;
+  mask: url(./images/barra.svg) no-repeat;
+  mask-size: contain;
   position: absolute;
   right: -62px;
   top: -1.3px;
@@ -197,7 +247,7 @@ button.loading::after,
   vertical-align: top;
 }
 
-footer img {
+footer svg {
   display: inline-block;
   height: 25px;
   margin: 0 15px;
@@ -229,11 +279,14 @@ aside + aside {
 
 p.loading::before,
 .share::before {
-  background: url("./images/sf2.svg") center center no-repeat;
-  background-size: contain;
+  background-color: currentColor;
   content: "";
   height: 7vw;
   left: 50%;
+  mask-image: url(./images/sf2.svg);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
   max-height: 50px;
   position: absolute;
   top: 40px;
@@ -275,9 +328,9 @@ p.loading::before,
 }
 
 @media screen and (min-width: 768px) {
-  body {
-    background-position: center 30px;
-    background-size: 615px auto;
+  body::before {
+    mask-size: 615px auto;
+    top: 30px;
   }
 
   h1 {
