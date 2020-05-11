@@ -35,13 +35,11 @@ if (firebase.messaging.isSupported()) {
 function subscribe() {
   return messaging
     .getToken()
-    .then((currentToken) => {
-      if (currentToken) {
-        return sendTokenToServer(currentToken);
-      } else {
-        return setTokenSentToServer(false);
-      }
-    })
+    .then((currentToken) =>
+      currentToken
+        ? sendTokenToServer(currentToken)
+        : setTokenSentToServer(false)
+    )
     .catch((err) => {
       return setTokenSentToServer(false);
     });
@@ -49,6 +47,7 @@ function subscribe() {
 
 function sendTokenToServer(currentToken) {
   if (!isTokenSentToServer()) {
+    firebaseLog("registered_to_notifications");
     return fetch(`/.netlify/functions/register?token=${currentToken}`, {
       method: "POST",
     })
@@ -81,4 +80,8 @@ export function isMessagingSupported() {
     window.Notification.permission !== "denied" &&
     firebase.messaging.isSupported()
   );
+}
+
+export function firebaseLog(event) {
+  firebase.analytics().logEvent(event);
 }
